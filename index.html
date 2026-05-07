@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- BUILD: dual-logo-v10-mobile-single (mobile=logo singolo centrale, desktop=2 laterali; particelle piu visibili) -->
+<!-- BUILD: dual-logo-v11-tablet-fixed (soglia mobile/tablet alzata a 1100px) -->
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -9579,9 +9579,11 @@ function initHero() {
       const W = rect.width, H = rect.height;
       if (W <= 0 || H <= 0) return false;
       
-      // Su mobile/canvas stretti: UN logo centrato dietro al testo della hero
-      // (effetto "filigrana luminosa"). Su desktop: due loghi laterali.
-      if (lIsMobile || W < 900) {
+      // Su mobile/tablet/canvas stretti (sotto 1100px): UN logo centrato dietro al testo della hero
+      // (effetto "filigrana luminosa"). Su desktop pieno: due loghi laterali.
+      // Soglia 1100px scelta perché sotto questa larghezza gli spazi laterali a fianco
+      // della headline sono troppo stretti per due loghi di dimensioni leggibili.
+      if (lIsMobile || W < 1100) {
         return buildMobileSingleLogo(imgEl, W, H);
       }
       
@@ -9880,7 +9882,7 @@ function initHero() {
     // mai un logo centrale che si sovrapponga alla scritta principale.
     function buildFromText(W, H) {
       // Stessa guardia: niente animazione su mobile/canvas stretti
-      if (lIsMobile || W < 900) return true;
+      if (lIsMobile || W < 1100) return true;
       
       // Misura la headline come in buildFromLogo
       const hero = logoCanvas.closest('.hero');
